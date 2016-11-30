@@ -6,8 +6,8 @@
 
 namespace PagSeguro\Form;
 
-use Base\Form\AbstractForm;
 use Interop\Container\ContainerInterface;
+use Zend\Form\Form;
 
 
 /**
@@ -15,27 +15,27 @@ use Interop\Container\ContainerInterface;
  *
  * Esta class foi gerada via Zend\Code\Generator.
  */
-class InscritosForm extends AbstractForm
+class SenderForm extends Form
 {
 
     /**
      * construct do Table
      *
-     * @return \PagSeguro\Form\InscritosForm
+     * @return \PagSeguro\Form\SenderForm
      * @param ContainerInterface $containerInterface
      * @param string $name
      * @param array $options
      */
-    public function __construct(ContainerInterface $containerInterface, $name = 'Inscritos', array $options = array())
+    public function __construct(ContainerInterface $containerInterface, $name = 'Sender', array $options = array())
     {
         // Configurações iniciais do Form;
-        parent::__construct($containerInterface, $name, $options);
+        parent::__construct($name, $options);
         $this->setAttribute("id","Manager");
-        $this->setInputFilter($containerInterface->get(InscritosFilter::class));
+        $this->setInputFilter($containerInterface->get(SenderFilter::class));
 
         //############################################ informações da coluna senderName ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'senderName',
                 'options' => [
                     'label' => 'Nome completo',
@@ -61,7 +61,7 @@ class InscritosForm extends AbstractForm
 
         //############################################ informações da coluna senderCPF ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'senderCPF',
                 'options' => [
                     'label' => 'CPF (somente números)',
@@ -87,7 +87,7 @@ class InscritosForm extends AbstractForm
 
         //############################################ informações da coluna senderEmail ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'senderEmail',
                 'options' => [
                     'label' => 'E-mail',
@@ -113,7 +113,7 @@ class InscritosForm extends AbstractForm
 
         //############################################ informações da coluna senderAreaCode ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'senderAreaCode',
                 'options' => [
                     'label' => 'Code/Area',
@@ -139,7 +139,7 @@ class InscritosForm extends AbstractForm
 
         //############################################ informações da coluna senderPhone ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'senderPhone',
                 'options' => [
                     'label' => 'Telefone',
@@ -165,7 +165,7 @@ class InscritosForm extends AbstractForm
 
         //############################################ informações da coluna shippingAddressPostalCode ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'shippingAddressPostalCode',
                 'options' => [
                     'label' => 'CEP (somente números)',
@@ -191,7 +191,7 @@ class InscritosForm extends AbstractForm
 
         //############################################ informações da coluna shippingAddressStreet ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'shippingAddressStreet',
                 'options' => [
                     'label' => 'Rua, Avenida, etc ...',
@@ -217,7 +217,7 @@ class InscritosForm extends AbstractForm
 
         //############################################ informações da coluna shippingAddressNumber ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'shippingAddressNumber',
                 'options' => [
                     'label' => 'Número',
@@ -242,7 +242,7 @@ class InscritosForm extends AbstractForm
 
         //############################################ informações da coluna shippingAddressComplement ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'shippingAddressComplement',
                 'options' => [
                     'label' => 'Complemento',
@@ -268,7 +268,7 @@ class InscritosForm extends AbstractForm
 
         //############################################ informações da coluna shippingAddressDistrict ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'shippingAddressDistrict',
                 'options' => [
                     'label' => 'Bairro',
@@ -294,7 +294,7 @@ class InscritosForm extends AbstractForm
 
         //############################################ informações da coluna shippingAddressCity ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'shippingAddressCity',
                 'options' => [
                     'label' => 'Cidade',
@@ -320,7 +320,7 @@ class InscritosForm extends AbstractForm
 
         //############################################ informações da coluna shippingAddressState ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'shippingAddressState',
                 'options' => [
                     'label' => 'Estado',
@@ -346,7 +346,7 @@ class InscritosForm extends AbstractForm
 
         //############################################ informações da coluna shippingAddressCountry ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'shippingAddressCountry',
                 'options' => [
                     'label' => 'Pais',

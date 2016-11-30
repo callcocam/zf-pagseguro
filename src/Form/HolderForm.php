@@ -6,8 +6,8 @@
 
 namespace PagSeguro\Form;
 
-use Base\Form\AbstractForm;
 use Interop\Container\ContainerInterface;
+use Zend\Form\Form;
 
 
 /**
@@ -15,7 +15,7 @@ use Interop\Container\ContainerInterface;
  *
  * Esta class foi gerada via Zend\Code\Generator.
  */
-class HolderForm extends AbstractForm
+class HolderForm extends Form
 {
 
     /**
@@ -29,13 +29,13 @@ class HolderForm extends AbstractForm
     public function __construct(ContainerInterface $containerInterface, $name = 'Card', array $options = array())
     {
         // Configurações iniciais do Form;
-        parent::__construct($containerInterface, $name, $options);
+        parent::__construct( $name, $options);
         $this->setAttribute("id","Manager");
-        $this->setInputFilter($containerInterface->get(InscritosFilter::class));
+        $this->setInputFilter($containerInterface->get(HolderFilter::class));
 
         //############################################ informações da coluna senderName ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'creditCardHolderName',
                 'options' => [
                     'label' => 'Nome (Como está; impresso no cartão)',
@@ -61,7 +61,7 @@ class HolderForm extends AbstractForm
 
         //############################################ informações da coluna cardExpirationYear ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'creditCardHolderCPF',
                 'options' => [
                     'label' => 'CPF (somente números)',
@@ -87,7 +87,7 @@ class HolderForm extends AbstractForm
 
         //############################################ informações da coluna creditCardHolderAreaCode ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'creditCardHolderAreaCode',
                 'options' => [
                     'label' => 'DDD',
@@ -113,7 +113,7 @@ class HolderForm extends AbstractForm
 
         //############################################ informações da coluna creditCardHolderPhone ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'creditCardHolderPhone',
                 'options' => [
                     'label' => 'Telefone',
@@ -140,7 +140,7 @@ class HolderForm extends AbstractForm
 
         //############################################ informações da coluna billingAddressPostalCode ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'billingAddressPostalCode',
                 'options' => [
                     'label' => 'CEP',
@@ -166,7 +166,7 @@ class HolderForm extends AbstractForm
 
         //############################################ informações da coluna billingAddressCity ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'billingAddressCity',
                 'options' => [
                     'label' => 'Cidade',
@@ -191,7 +191,7 @@ class HolderForm extends AbstractForm
 
  //############################################ informações da coluna billingAddressState ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'billingAddressState',
                 'options' => [
                     'label' => 'Estado',
@@ -218,7 +218,7 @@ class HolderForm extends AbstractForm
 
         //############################################ informações da coluna billingAddressDistrict ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'billingAddressDistrict',
                 'options' => [
                     'label' => 'Bairro',
@@ -243,7 +243,7 @@ class HolderForm extends AbstractForm
 
   //############################################ informações da coluna billingAddressStreet ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'billingAddressStreet',
                 'options' => [
                     'label' => 'Rua, Avenida, etc ...',
@@ -268,7 +268,7 @@ class HolderForm extends AbstractForm
 
   //############################################ informações da coluna billingAddressNumber ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'billingAddressNumber',
                 'options' => [
                     'label' => 'Número',
@@ -293,7 +293,7 @@ class HolderForm extends AbstractForm
 
         //############################################ informações da coluna billingAddressComplement ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'billingAddressComplement',
                 'options' => [
                     'label' => 'Complemento',
@@ -318,7 +318,7 @@ class HolderForm extends AbstractForm
 
         //############################################ informações da coluna billingAddressCountry ##############################################:
         $this->add([
-                'type' => 'hidden',//text,hidden, select, radio, checkbox, textarea
+                'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'billingAddressCountry',
                 'options' => [
                     'label' => 'Pais',

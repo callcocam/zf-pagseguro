@@ -6,11 +6,11 @@
 
 namespace PagSeguro\Form;
 
-use Base\Form\AbstractFilter;
-use Base\Validator\Cpf;
 use Interop\Container\ContainerInterface;
+use PagSeguro\Validator\Cpf;
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
+use Zend\InputFilter\InputFilter;
 use Zend\Validator\EmailAddress;
 use Zend\Validator\NotEmpty;
 use Zend\Validator\StringLength;
@@ -20,20 +20,18 @@ use Zend\Validator\StringLength;
  *
  * Esta class foi gerada via Zend\Code\Generator.
  */
-class InscritosFilter extends AbstractFilter
+class SenderFilter extends InputFilter
 {
 
     /**
      * construct do Table
      *
-     * @return \PagSeguro\Form\InscritosFilter
+     * @return \PagSeguro\Form\SenderFilter
      * @param ContainerInterface $containerInterface
      */
     public function __construct(ContainerInterface $containerInterface)
     {
-        // Configurações iniciais do Form
-        parent::__construct($containerInterface);
-
+        
         //############################################ informações da coluna senderName ##############################################:
         $this->add([
             'name' => 'senderName',

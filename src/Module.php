@@ -13,9 +13,15 @@ use PagSeguro\Form\Factory\CardFilterFactory;
 use PagSeguro\Form\Factory\CardFormFactory;
 use PagSeguro\Form\Factory\HolderFilterFactory;
 use PagSeguro\Form\Factory\HolderFormFactory;
+use PagSeguro\Form\Factory\SenderFilterFactory;
+use PagSeguro\Form\Factory\SenderFormFactory;
 use PagSeguro\Form\HolderFilter;
 use PagSeguro\Form\HolderForm;
+use PagSeguro\Form\SenderFilter;
+use PagSeguro\Form\SenderForm;
 use PagSeguro\Services\Factory\PagSeguroDataFactory;
+use PagSeguro\Services\PagSeguroData;
+use PagSeguro\View\Helper\Factory\PagSeguroHelperFactory;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
@@ -39,7 +45,7 @@ class Module implements ConfigProviderInterface, ViewHelperProviderInterface, Se
     {
         return [
             'factories'=>[
-                'pagSeguroData'=>PagSeguroDataFactory::class
+                'pagSeguroHelper'=>PagSeguroHelperFactory::class
             ],
             'invokables'=>[
 
@@ -61,6 +67,9 @@ class Module implements ConfigProviderInterface, ViewHelperProviderInterface, Se
                CardFilter::class=>CardFilterFactory::class,
                HolderForm::class=>HolderFormFactory::class,
                HolderFilter::class=>HolderFilterFactory::class,
+               SenderForm::class=>SenderFormFactory::class,
+               SenderFilter::class=>SenderFilterFactory::class,
+                PagSeguroData::class=>PagSeguroDataFactory::class
             ],
             'invokables'=>[
 

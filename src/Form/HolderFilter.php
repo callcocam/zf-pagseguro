@@ -6,21 +6,19 @@
 
 namespace PagSeguro\Form;
 
-use Base\Form\AbstractFilter;
-use Base\Validator\Cpf;
 use Interop\Container\ContainerInterface;
+use PagSeguro\Validator\Cpf;
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
-use Zend\Validator\EmailAddress;
+use Zend\InputFilter\InputFilter;
 use Zend\Validator\NotEmpty;
-use Zend\Validator\StringLength;
 
 /**
  * SIGA-Smart
  *
  * Esta class foi gerada via Zend\Code\Generator.
  */
-class HolderFilter extends AbstractFilter
+class HolderFilter extends InputFilter
 {
 
     /**
@@ -31,8 +29,7 @@ class HolderFilter extends AbstractFilter
      */
     public function __construct(ContainerInterface $containerInterface)
     {
-        // Configurações iniciais do Form
-        parent::__construct($containerInterface);
+       
 
         //############################################ informações da coluna  cardNumber##############################################:
         $this->add([

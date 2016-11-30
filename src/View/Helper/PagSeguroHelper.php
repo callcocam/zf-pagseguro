@@ -12,7 +12,7 @@ namespace PagSeguro\View\Helper;
 use PagSeguro\Services\PagSeguroData;
 use Zend\View\Helper\AbstractHelper;
 
-class PagSeguroDataHelper extends AbstractHelper{
+class PagSeguroHelper extends AbstractHelper{
     /**
      * @var
      */

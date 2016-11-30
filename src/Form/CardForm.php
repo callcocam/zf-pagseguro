@@ -6,16 +6,15 @@
 
 namespace PagSeguro\Form;
 
-use Base\Form\AbstractForm;
 use Interop\Container\ContainerInterface;
-
+use Zend\Form\Form;
 
 /**
  * SIGA-Smart
  *
  * Esta class foi gerada via Zend\Code\Generator.
  */
-class CardForm extends AbstractForm
+class CardForm extends Form
 {
 
     /**
@@ -29,9 +28,9 @@ class CardForm extends AbstractForm
     public function __construct(ContainerInterface $containerInterface, $name = 'Card', array $options = array())
     {
         // Configurações iniciais do Form;
-        parent::__construct($containerInterface, $name, $options);
+        parent::__construct($name, $options);
         $this->setAttribute("id","Manager");
-        $this->setInputFilter($containerInterface->get(InscritosFilter::class));
+        $this->setInputFilter($containerInterface->get(CardFilter::class));
 
         //############################################ informações da coluna senderName ##############################################:
         $this->add([
@@ -64,7 +63,7 @@ class CardForm extends AbstractForm
                 'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'cardExpirationMonth',
                 'options' => [
-                    'label' => 'Data de Vencimento',
+                    'label' => 'Mês',
                     //'value_options'      =>[],
                     //'disable_inarray_validator' => true,
                     //'label_attributes'=>['class'=>'control-label radio-inline radio-styled','for'=>'SENDERCPF'],
@@ -73,7 +72,7 @@ class CardForm extends AbstractForm
                 'attributes' => [
                     'id'=>'cardExpirationMonth',
                     'class' =>'form-control cardDatainput month',
-                    'title' => 'Data de Vencimento (99/9999)',
+                    'title' => 'Mes da Expiração (somente numeros)',
                     'placeholder' => '99',
                     'data-holder-field'=>'cardExpirationMonth',
                     //'readonly' => true/false,
@@ -90,7 +89,7 @@ class CardForm extends AbstractForm
                 'type' => 'text',//text,hidden, select, radio, checkbox, textarea
                 'name' => 'cardExpirationYear',
                 'options' => [
-                    'label' => ' (99/9999)',
+                    'label' => 'Ano',
                     //'value_options'      =>[],
                     //'disable_inarray_validator' => true,
                     //'label_attributes'=>['class'=>'control-label radio-inline radio-styled','for'=>'SENDERCPF'],
@@ -99,7 +98,7 @@ class CardForm extends AbstractForm
                 'attributes' => [
                     'id'=>'cardExpirationYear',
                     'class' =>'form-control cardDatainput year',
-                    'title' => 'CPF (somente números)',
+                    'title' => 'Ano Da Expiração (somente números)',
                     'placeholder' => '9999',
                     'data-holder-field'=>'cardExpirationYear',
                     //'readonly' => true/false,
@@ -246,7 +245,7 @@ class CardForm extends AbstractForm
                 ],
             ]
         );
-       $this->setSave([
+       $this->add([
            'name' => 'creditCardPaymentButton',
            'type' => 'button',
            'attributes' => [

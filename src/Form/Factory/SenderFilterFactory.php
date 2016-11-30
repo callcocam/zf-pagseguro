@@ -10,10 +10,10 @@ namespace PagSeguro\Form\Factory;
 
 
 use Interop\Container\ContainerInterface;
-use PagSeguro\Form\InscritosFilter;
+use PagSeguro\Form\SenderFilter;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
-class InscritosFilterFactory implements FactoryInterface{
+class SenderFilterFactory implements FactoryInterface{
 
     /**
      * Create an object
@@ -25,6 +25,6 @@ class InscritosFilterFactory implements FactoryInterface{
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return new InscritosFilter($container);
+        return new SenderFilter($container);
     }
 }

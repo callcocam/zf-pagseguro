@@ -25,34 +25,59 @@ class PagSeguroData {
         $this->sandbox = (bool)$sandbox;
         $this->email = $configPagSeguro['email'];
         $this->token = $configPagSeguro['token'];
-        $this->getProductionData();
-        $this->getSandboxData();
     }
 
+    /**
+     * Pega os dado necessarios para comunicação do ambiente do pag seguro
+     * @param $key
+     * @return a configuração do ambiente
+     */
     private function getEnviromentData($key) {
         if ($this->sandbox) {
+            $this->getSandboxData();
             return $this->sandboxData[$key];
         } else {
+            $this->getProductionData();
             return $this->productionData[$key];
         }
     }
 
+    /**
+     * Pega a url da sessão
+     * @return mixed
+     */
     public function getSessionURL() {
         return $this->getEnviromentData('sessionURL');
     }
 
+    /**
+     * Pega a url de transation
+     * @return mixed
+     */
     public function getTransactionsURL() {
         return $this->getEnviromentData('transactionsURL');
     }
 
+    /**
+     * Pega url do script necessario do pag seguro
+     * @return mixed
+     */
     public function getJavascriptURL() {
         return $this->getEnviromentData('javascriptURL');
     }
 
+    /**
+     * Pega as credenciais da conta do pag seguro
+     * @return mixed
+     */
     public function getCredentials() {
         return $this->getEnviromentData('credentials');
     }
 
+    /**
+     * Verifica o ambiente se production ou sandbox
+     * @return bool
+     */
     public function isSandbox() {
         return (bool)$this->sandbox;
     }

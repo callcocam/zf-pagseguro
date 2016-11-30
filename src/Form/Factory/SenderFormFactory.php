@@ -10,10 +10,10 @@ namespace PagSeguro\Form\Factory;
 
 
 use Interop\Container\ContainerInterface;
-use PagSeguro\Form\InscritosForm;
+use PagSeguro\Form\SenderForm;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
-class InscritosFormFactory implements FactoryInterface {
+class SenderFormFactory implements FactoryInterface {
 
     /**
      * Create an object
@@ -25,6 +25,6 @@ class InscritosFormFactory implements FactoryInterface {
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return new InscritosForm($container);
+        return new SenderForm($container);
     }
 }

@@ -1,0 +1,31 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Admin
+ * Date: 30/11/2016
+ * Time: 09:41
+ */
+
+return [
+    'pagseguro'=>[
+        'ambiente'=>'sandbox',//sandbox ou production
+
+        'email'=>'callcocam@gmail.com',
+
+        'token'=>'BEFA9E61638143A39CEAA12C0175D324',
+
+        'application_id'=>'app0642178461',
+
+        'application_key'=>'67EEB64EC0C0C350046DEFAE4C9D3BCA',
+
+        'pg_charset'=>'UTF-8',
+
+        'logs_active'=>false,
+
+        'logs_location'=>'./data/logs/logs.txt',
+
+        'redirecturl'=>'',//url de redirecionamento
+
+        'notification'=>''//url de notificação
+    ]
+];

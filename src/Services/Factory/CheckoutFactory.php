@@ -1,21 +1,20 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Claudio
- * Date: 18/11/2016
- * Time: 21:34
+ * User: Admin
+ * Date: 30/11/2016
+ * Time: 09:29
  */
 
 namespace PagSeguro\Services\Factory;
 
 
 use Interop\Container\ContainerInterface;
-use PagSeguro\Model\PagseguroRepository;
-use PagSeguro\Services\PagSeguroData;
-use PagSeguro\View\Helper\PagSeguroDataHelper;
+use PagSeguro\Services\Checkout;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
-class PagSeguroDataFactory implements FactoryInterface {
+class CheckoutFactory implements FactoryInterface
+{
 
     /**
      * Create an object
@@ -27,8 +26,6 @@ class PagSeguroDataFactory implements FactoryInterface {
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $PagSeguroConfig=$container->get('Config')['pagseguro'];
-        $sandbox=$PagSeguroConfig['ambiente']=='sandbox'?true:false;
-        return new PagSeguroData($PagSeguroConfig,$sandbox);
+        return new Checkout($container);
     }
 }

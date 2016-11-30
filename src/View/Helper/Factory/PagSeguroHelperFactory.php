@@ -6,16 +6,14 @@
  * Time: 21:34
  */
 
-namespace PagSeguro\Services\Factory;
-
+namespace PagSeguro\View\Helper\Factory;
 
 use Interop\Container\ContainerInterface;
-use PagSeguro\Model\PagseguroRepository;
 use PagSeguro\Services\PagSeguroData;
-use PagSeguro\View\Helper\PagSeguroDataHelper;
+use PagSeguro\View\Helper\PagSeguroHelper;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
-class PagSeguroDataFactory implements FactoryInterface {
+class PagSeguroHelperFactory implements FactoryInterface {
 
     /**
      * Create an object
@@ -29,6 +27,8 @@ class PagSeguroDataFactory implements FactoryInterface {
     {
         $PagSeguroConfig=$container->get('Config')['pagseguro'];
         $sandbox=$PagSeguroConfig['ambiente']=='sandbox'?true:false;
-        return new PagSeguroData($PagSeguroConfig,$sandbox);
+        $pagSeguroData = new PagSeguroData($PagSeguroConfig,$sandbox);
+        return new PagSeguroHelper($pagSeguroData);
+
     }
 }

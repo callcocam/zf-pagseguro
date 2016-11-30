@@ -6,21 +6,19 @@
 
 namespace PagSeguro\Form;
 
-use Base\Form\AbstractFilter;
-use Base\Validator\Cpf;
+
 use Interop\Container\ContainerInterface;
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
-use Zend\Validator\EmailAddress;
+use Zend\InputFilter\InputFilter;
 use Zend\Validator\NotEmpty;
-use Zend\Validator\StringLength;
 
 /**
  * SIGA-Smart
  *
  * Esta class foi gerada via Zend\Code\Generator.
  */
-class CardFilter extends AbstractFilter
+class CardFilter extends InputFilter
 {
 
     /**
@@ -32,8 +30,7 @@ class CardFilter extends AbstractFilter
     public function __construct(ContainerInterface $containerInterface)
     {
         // Configurações iniciais do Form
-        parent::__construct($containerInterface);
-
+       
         //############################################ informações da coluna  cardNumber##############################################:
         $this->add([
             'name' => 'cardNumber',
@@ -66,11 +63,7 @@ class CardFilter extends AbstractFilter
                     'name' => NotEmpty::class,
                     'options' => [
                         'messages' => [NotEmpty::IS_EMPTY => "Campo Obrigatorio"]
-                    ],
-                    'name' => Cpf::class,
-                    'options' => [
-                        'messages' => [Cpf::IS_EMPTY => "Oops! Cpf Invalido"]
-                    ],
+                    ]
                 ],
             ],
         ]);
@@ -88,11 +81,7 @@ class CardFilter extends AbstractFilter
                     'name' => NotEmpty::class,
                     'options' => [
                         'messages' => [NotEmpty::IS_EMPTY => "Campo Obrigatorio"]
-                    ],
-                    'name' => Cpf::class,
-                    'options' => [
-                        'messages' => [Cpf::IS_EMPTY => "Oops! Cpf Invalido"]
-                    ],
+                    ]
                 ],
             ],
         ]);

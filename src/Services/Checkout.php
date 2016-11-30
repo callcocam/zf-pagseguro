@@ -1,16 +1,17 @@
 <?php
 namespace PagSeguro\Services;
 
-use Admin\Model\Pagseguro\PagseguroRepository;
-use Base\Model\Cache;
-use Base\Services\Client;
+//use Admin\Model\Pagseguro\PagseguroRepository;
+
 use Interop\Container\ContainerInterface;
+use Zend\Http\Client;
 
 class Checkout {
 
 	private $pagSeguroData;
     private $containerInterface;
     protected $statusCode;
+    protected $httpConnection;
 
     /**
      * @return mixed
@@ -25,19 +26,10 @@ class Checkout {
      * @param bool $sandbox
      */
     public function __construct(ContainerInterface $containerInterface,$sandbox = true) {
-        if(!$containerInterface->get(Cache::class)->hasItem('issusers')){
-            $containerInterface->get('issusers');
-        }
-        $issusers=$containerInterface->get(Cache::class)->getItem('issusers');
-        $configPagSeguro=$containerInterface->get(PagseguroRepository::class)->findOneBy(['empresa'=>$issusers['id']]);
-        if($configPagSeguro->getResult()) {
-            $configPagSeguro = $configPagSeguro->getData()->toArray();
-            $configPagSeguro['ambiente'] = $configPagSeguro['ambiente']=='sandbox'?true:false;
-            $this->pagSeguroData = new PagSeguroData($configPagSeguro, $configPagSeguro['ambiente']);
 
-        }
-
+		$this->pagSeguroData = $containerInterface->get(PagSeguroData::class);
         $this->containerInterface=$containerInterface;
+		$this->httpConnection=new Client();
 	}
 
 	public function showTemplate() {
@@ -52,13 +44,10 @@ class Checkout {
          * @var $httpConnection Client
          */
         // Creating a http connection (CURL abstraction)
-        //$httpConnection = new HttpConnection();
-        $httpConnection = $this->containerInterface->get(Client::class);
-        //$httpConnection->post($this->pagSeguroData->getSessionURL(), $this->pagSeguroData->getCredentials());
-        $httpConnection->setUri($this->pagSeguroData->getSessionURL());
-        $httpConnection->setMethod('POST');
-        $httpConnection->setParameterPost( $this->pagSeguroData->getCredentials());
-        $response = $httpConnection->send();
+        $this->httpConnection->setUri($this->pagSeguroData->getSessionURL());
+        $this->httpConnection->setMethod('POST');
+        $this->httpConnection->setParameterPost( $this->pagSeguroData->getCredentials());
+        $response = $this->httpConnection->send();
         if ($response->isSuccess()) {
             // Request OK getting the result
             //if ($httpConnection->getStatus() === 200) {
@@ -66,7 +55,7 @@ class Checkout {
 			$sessionId = $this->parseSessionIdFromXml($data);
 			return $sessionId;
 		} else {
-			throw new \Exception("API Request Error: ".$httpConnection->getResponse()->getStatusCode());
+			throw new \Exception("API Request Error: ".$this->httpConnection->getResponse()->getStatusCode());
 
 		}
 
@@ -80,20 +69,19 @@ class Checkout {
 		//$httpConnection = new HttpConnection();
 		$httpConnection = $this->containerInterface->get(Client::class);
         // Request to PagSeguro Session API using Credentials
-		//$httpConnection->post($this->pagSeguroData->getSessionURL(), $this->pagSeguroData->getCredentials());
-        $httpConnection->setUri($this->pagSeguroData->getSessionURL());
-        $httpConnection->setMethod('POST');
-        $httpConnection->setParameterPost( $this->pagSeguroData->getCredentials());
-        $response = $httpConnection->send();
+	    $this->httpConnection->setUri($this->pagSeguroData->getSessionURL());
+        $this->httpConnection->setMethod('POST');
+        $this->httpConnection->setParameterPost($this->pagSeguroData->getCredentials());
+        $response = $this->httpConnection->send();
         if ($response->isSuccess()) {
         // Request OK getting the result
 		//if ($httpConnection->getStatus() === 200) {
-			$data = $httpConnection->getResponse();
+			$data = $this->httpConnection->getResponse();
 			$sessionId = $this->parseSessionIdFromXml($data);
 			return $sessionId;
 		} else {
 
-			throw new \Exception("API Request Error: ".$httpConnection->getResponse()->getStatusCode());
+			throw new \Exception("API Request Error: ".$this->httpConnection->getResponse()->getStatusCode());
 
 		}
 
@@ -114,12 +102,11 @@ class Checkout {
             $params['senderEmail']='email@sandbox.pagseguro.com.br';
         }
 		 // treat parameters here!
-		$httpConnection = $this->containerInterface->get(Client::class);//new HttpConnection();
-	    $httpConnection->setUri($this->pagSeguroData->getTransactionsURL());
-        $httpConnection->setMethod('POST');
-        $httpConnection->setParameterPost($params);
-        $httpConnection->setHeaders(['access-control-allow-origin'=>'https://sandbox.pagseguro.uol.com.br']);
-        $response = $httpConnection->send();
+	    $this->httpConnection->setUri($this->pagSeguroData->getTransactionsURL());
+        $this->httpConnection->setMethod('POST');
+        $this->httpConnection->setParameterPost($params);
+        $this->httpConnection->setHeaders(['access-control-allow-origin'=>'https://sandbox.pagseguro.uol.com.br']);
+        $response = $this->httpConnection->send();
         if ($response->isSuccess()) {
             // Get Xml From response body
             $xmlArray = $this->paymentResultXml($response->getBody());

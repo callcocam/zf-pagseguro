@@ -5,11 +5,23 @@
             <li role="presentation" class="active"><a class="changePaymentMethod" href="#creditCard" aria-controls="creditCard" role="tab" data-toggle="tab">Pagar com cartão</a></li>
             <li role="presentation"><a class="changePaymentMethod" href="#boleto" aria-controls="boleto" role="tab" data-toggle="tab">Pagar com boleto</a></li>
         </ul>
-
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="creditCard">
-                <?php echo $this->partial('./templates/paymentMethods.inc.phtml');?>
+                <div class="row">
+                    <div class="col-md-12 cardData">
+                        <?php echo $this->partial('./templates/cardData.inc.phtml');?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-xs-12">
+                        <?php echo $this->partial('./templates/senderData.inc.phtml');?>
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                        <?php echo $this->partial('./templates/holderData.inc.phtml');?>
+                        <?php echo $this->partial('./templates/orderData.inc.phtml');?>
+                    </div>
+                </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="boleto">
                 <div id="mensagem-boleto"></div>
@@ -18,9 +30,5 @@
                 <?php echo $this->partial('./templates/boletoData.inc.phtml');?>
             </div>
         </div>
-        <?php echo $this->partial('./templates/buyerData.inc.phtml');?>
-        <?php echo $this->partial('./templates/orderData.inc.phtml');?>
-
-
     </div>
 </div>
