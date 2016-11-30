@@ -1,0 +1,40 @@
+<h2>Dados do Cart&atilde;o </h2>
+<div id="creditCardData">
+    <div class="row" id="cardBrand">
+        <div class="col-md-7 col-xs-12">
+            <?=$this->formRow($this->formCard->get('cardNumber'));?>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-2  col-xs-6">
+            <?=$this->formRow($this->formCard->get('cardExpirationMonth'));?>
+        </div>
+        <div class="col-md-3  col-xs-6">
+            <?=$this->formRow($this->formCard->get('cardExpirationYear'));?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4  col-xs-12">
+            <?=$this->formRow($this->formCard->get('cardCvv'));?>
+        </div>
+    </div>
+
+    <div class="form-group" id="installmentsWrapper">
+        <?=$this->formRow($this->formCard->get('installmentQuantity'));?>
+        <?=$this->formRow($this->formCard->get('installmentValue'));?>
+    </div>
+    <div class="form-group">
+        <?=$this->formRow($this->formCard->get('creditCardHolderBirthDate'));?>
+    </div>
+
+    <div class="form-group">
+        <?=$this->formRow($this->formCard->get('holderType'));?>
+        <?=$this->formRow($this->formCard->get('creditCardToken'));?>
+        <?=$this->formRow($this->formCard->get('creditCardBrand'));?>
+        <?=$this->formRow($this->formCard->get('creditCardPaymentButton'));?>
+    </div>
+</div>
+<?php echo $this->partial('./templates/holderData.inc.phtml');?>
